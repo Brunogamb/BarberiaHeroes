@@ -1,0 +1,72 @@
+---
+---
+
+<section class="contact" aria-label="Contacto">
+    <div class="contact-inner">
+        <h2>Reservá tu turno</h2>
+        <p>¿Listo para un corte nuevo? Reservá en línea o llamanos y te asesoramos.</p>
+        <div class="actions">
+        <a class="btn primary" href="/turnos">Reservar turno</a>
+        <a class="btn ghost" href="/contacto">Contactar</a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .contact { 
+        padding: 64px 20px; 
+        background: var(--color-bg); 
+        color: var(--color-text); 
+    }
+
+    .contact-inner { 
+        max-width: 1000px; 
+        margin: 0 auto; 
+        text-align: center; 
+    }
+    
+    .contact-inner h2 { 
+        font-size: 1.8rem; 
+        margin-bottom: 8px; 
+    }
+
+    .contact-inner p { 
+        color: var(--color-text-light); 
+        margin-bottom: 18px; 
+        font-size: 1.1rem;
+    }
+
+    .actions { 
+        display: flex; 
+        gap: 12px; 
+        justify-content:center; 
+    }
+
+    .btn { 
+        padding: 12px 20px; 
+        border-radius: 28px; 
+        font-weight: 700; 
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn.primary { 
+        background: var(--color-accent); 
+        color: var(--color-primary-dark);
+    }
+
+    .btn.primary:hover { 
+        background: var(--color-text-light);
+        color: var(--color-white);
+    }
+
+    .btn.ghost { 
+        background: transparent; 
+        border: 2px solid rgba(0,0,0,0.06); 
+        color: var(--color-text); 
+    }
+
+    .btn.ghost:hover { 
+        background: rgba(0,0,0,0.03); 
+    }
+</style>

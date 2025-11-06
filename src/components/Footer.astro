@@ -1,0 +1,187 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+---
+
+<footer> 
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <Image src={logo} alt="Barbería Héroes" />
+            <div class="brand-copy">
+                <h2>Barbería Héroes</h2>
+                <p>Tradición, estilo y buen trato</p>
+            </div>
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-section location">    
+                <a href="/contacto">Gral. Pascual Echagüe 841,</a>
+                <a href="/contacto">E3100 Paraná, Entre Ríos</a>
+            </div>
+
+            <div class="footer-section redes">
+                <a href="http://wa.link/176k1o" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> +54 343 517-6442</a>
+                <a href="https://www.instagram.com/barberia_heroes/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> barberia_heroes</a>
+                <a href="https://www.tiktok.com/@barberia_heroes" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i> barberia_heroes</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-bottom">
+        <p>&copy; <span id="year">{new Date().getFullYear()}</span> Barberia Heroes. Todos los derechos reservados. Imágenes y marcas de terceros pertenecen a sus respectivos dueños.</p>
+        <p class="dev-name">Desarrollado por <a href="https://github.com/BrunoGamb" target="_blank" rel="noopener noreferrer" class="dev-link">BrunoGamb</a></p>
+    </div>
+</footer>
+
+<style>
+    footer {
+        background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+        box-shadow: 0 4px 6px var(--color-shadow);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--color-text-on-primary);
+        padding: 10px 20px;
+        text-wrap: balance;
+    }
+
+    .footer-inner {
+        max-width: 1200px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        display: flex;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 10px 0;
+    }
+
+    .footer-brand img {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .footer-brand .brand-copy h2 {
+        margin: 0;
+        color: var(--color-white);
+        font-size: 1.25rem;
+        letter-spacing: 0.02em;
+    }
+
+    .footer-brand .brand-copy p {
+        margin: 2px 0 0 0;
+        color: rgba(255,255,255,0.8);
+        font-size: 0.95rem;
+    }
+
+    .footer-section {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        margin: 20px 0;
+        pointer-events: none;
+    }
+
+    .footer-section i {
+        margin-right: 8px;
+    }
+
+    .footer-section ul {
+        list-style: none;
+    }
+
+    .footer-section a {
+        font-size: 1.1rem;
+        line-height: 2;
+        width: fit-content;
+        pointer-events: auto;
+        white-space: nowrap;
+        display: inline-block;
+        color: var(--color-text-on-primary);
+        font-weight: 500;
+    }
+
+    .location a {
+        text-wrap: nowrap;
+    }   
+
+    .location:hover a {
+        color: var(--color-primary-lighter);
+    }
+
+    .footer-divider {
+        margin-top: 10px;
+        width: 100%;
+        max-width: 1200px;
+        height: 1px;
+        background: linear-gradient(to right, var(--color-primary) 0%, var(--color-primary-lighter) 40%, var(--color-primary-lighter) 60%, var(--color-primary) 100%);
+        opacity: 0.6;
+    }
+
+    .footer-bottom {
+        margin: 30px 0 10px 0;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.95);
+        font-size: 0.9rem;
+        line-height: 1.4;
+        text-shadow: var(--color-shadow-text-on-primary);
+    }
+
+    .dev-name {
+        margin-top: 10px;
+        color: var(--color-text-on-primary);
+    }
+
+    .dev-link {
+        font-weight: 600;
+        color: var(--color-text-on-primary);
+    }
+
+    .dev-link:hover, footer a:hover {
+        color: var(--color-primary-lighter);
+    }
+
+    @media (max-width: 1024px) {
+        .footer-content {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+            gap: 0;
+        }
+
+        .footer-section {
+            margin: 16px 0;
+        }
+    }
+</style>

@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Servicios from '../components/Servicios.astro';
+import Profesionales from '../components/Profesionales.astro';
+import Fecha from '../components/Fecha.astro';
+---
+
+<Layout title="Barberia Heroes | Sistema de Turnos">
+    <Hero title="Sistema de Turnos" subtitle="Reserva tu turno y vive la experiencia de Barbería Héroes." />
+    <Servicios />
+    <Profesionales />
+    <Fecha />
+</Layout>
+
+<script type="module">
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('reserve-btn')) {
+            document.getElementById('servicios').style.display = 'none';
+            document.getElementById('profesionales').style.display = 'block';
+        }
+        
+        if (e.target.classList.contains('back-btn')) {
+            document.getElementById('servicios').style.display = 'block';
+            document.getElementById('profesionales').style.display = 'none';
+        }
+
+        const botonProfesional = e.target.closest('.next-step');
+        if (botonProfesional) {
+            document.getElementById('profesionales').style.display = 'none';
+            document.getElementById('fecha').style.display = 'block';
+        }
+    });
+</script>

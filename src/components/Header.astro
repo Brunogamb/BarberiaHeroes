@@ -1,0 +1,282 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+---
+
+<header>
+    <div class="header-main">
+        <div class="left-bar">
+            <a href="/"><Image src={logo} alt="Farmacia La Estrella" /></a>
+        </div>
+        <nav class="center-bar desktop-menu" role="navigation" aria-label="Menú principal">
+            <ul>
+                <li><a href="/turnos">Turnos</a></li>
+                <li><a href="/cursos">Cursos</a></li>
+                <li><a href="/sobre-nosotros">Sobre nosotros</a></li>
+            </ul>
+        </nav>
+        <nav id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Menú móvil" aria-hidden="true">
+            <ul>
+                <li><a href="/turnos">Turnos</a></li>
+                <li><a href="/cursos">Cursos</a></li>
+                <li><a href="/sobre-nosotros">Sobre nosotros</a></li>
+            </ul>
+        </nav>
+        <div class="right-bar">
+            <a href="/contacto">Contacto</a>
+        </div>
+        <button class="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>
+
+<style>
+    header {
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-primary);
+        box-shadow: 0 4px 12px var(--color-shadow);
+        padding: 15px 20px;
+        height: 94px;
+    }
+
+    .header-main {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        gap: 40px;
+    }
+
+    .left-bar, .right-bar {
+        z-index: 200; 
+        display: flex;  
+        align-items: center;
+        justify-content: center;
+    }
+
+    .left-bar img {
+        display: block;
+        width: auto;
+        height: 76px;
+    }
+
+    .center-bar ul {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+    }
+
+    .center-bar a {
+        color: var(--color-text-on-primary);
+        font-weight: 600;
+        transition: all 0.3s ease;
+        padding: 8px 15px;
+        border-radius: 25px;
+        white-space: nowrap;
+        font-size: 1.2rem;
+    }
+
+    .center-bar a:hover {
+        background: var(--color-primary-lighter);
+        color: var(--color-white);
+        text-shadow: none;
+        box-shadow: 0 2px 8px var(--color-shadow);
+    }
+
+    .right-bar a {
+        color: var(--color-white);
+        font-weight: 700;
+        background: var(--color-accent);
+        padding: 10px 25px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        font-size: 1.2rem;
+        box-shadow: 0 2px 8px var(--color-shadow);
+    }
+
+    .right-bar a:hover {
+        background: var(--color-primary-lighter);
+        color: var(--color-white);
+        text-shadow: none;
+        box-shadow: 0 4px 12px var(--color-shadow);
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        inset: 0; 
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+        z-index: 80; 
+        padding: 40px 20px;
+        backdrop-filter: blur(8px);
+        animation: fadeInMenu 0.3s ease forwards;
+    }
+
+    @keyframes fadeInMenu {
+        from {opacity: 0; transform: translateY(-10px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 1024px) {
+        .header-main {
+            gap: 20px;
+        }
+
+        .center-bar a, .right-bar a {
+            font-size: 1.1rem;
+            padding: 8px 15px;
+        }
+
+        .center-bar ul {
+            gap: 20px;
+        }   
+
+        .left-bar img {
+            height: 67px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .left-bar {
+            margin-right: auto; 
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .desktop-menu {
+            display: none;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 28px;
+            height: 22px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 90; 
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--color-white);
+            border-radius: 2px;
+            transition: all 0.3s linear;
+            transform-origin: 4px;
+        }
+
+        .hamburger:hover span {
+            background: var(--color-accent);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+
+        .mobile-menu ul {
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            list-style: none;
+            display: flex;
+            gap: 60px;
+            text-align: center;
+        }
+
+        .mobile-menu a {
+            padding: 8px 15px;
+            color: var(--color-text-on-primary);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-radius: 25px;
+            white-space: nowrap;
+            font-size: 1.8rem;
+            text-shadow: var(--color-shadow-text-on-primary);
+        }
+
+        .mobile-menu a:hover {
+            background: var(--color-primary-lighter, #e0f7f8);
+            color: var(--color-accent, #1e8a8e);
+            box-shadow: 0 2px 8px var(--color-shadow);
+        }
+
+        header {
+            min-height: 94px;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+            height: 100dvh;
+        }
+    }
+</style>
+
+<script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+        const btnHamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const body = document.body;
+
+        if (!btnHamburger || !mobileMenu) return;
+
+        const toggleMenu = () => {
+            const expanded = btnHamburger.getAttribute('aria-expanded') === 'true';
+            btnHamburger.setAttribute('aria-expanded', !expanded);
+            btnHamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileMenu.setAttribute('aria-hidden', expanded);
+            body.classList.toggle('menu-open');
+        };
+
+        const closeMenu = () => {
+            btnHamburger.setAttribute('aria-expanded', 'false');
+            btnHamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            body.classList.remove('menu-open');
+        };
+
+        btnHamburger.addEventListener('click', toggleMenu);
+
+        document.addEventListener('click', (e) => {
+            if (mobileMenu.classList.contains('active') && 
+                !mobileMenu.contains(e.target) && 
+                !btnHamburger.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    });
+</script>

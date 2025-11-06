@@ -1,0 +1,149 @@
+---
+let fecha = "";
+let hora = "";
+---
+
+<section id="fecha" class="fecha-section" style="display:none;">
+    <div class="container">
+        <div class="form-grid">
+            <h2>ELEGÍ LA FECHA Y HORARIO</h2>
+
+            <form id="form-fecha" class="fecha-form">
+                <div class="input-group">
+                    <label for="fecha">Fecha</label>
+                    <input
+                        type="date"
+                        id="fecha"
+                        name="fecha"
+                        required
+                        on:change={(e) => (fecha = e.target.value)}
+                    />
+                </div>
+
+                <div class="input-group">
+                    <label for="hora">Horario</label>
+                    <input
+                        type="time"
+                        id="hora"
+                        name="hora"
+                        required
+                        on:change={(e) => (hora = e.target.value)}
+                    />
+                </div>
+
+                <button type="submit" class="btn-confirmar">Confirmar</button>
+            </form>
+
+            <div id="resumen-turno" class="resumen-turno hidden">
+                <h3>Turno seleccionado</h3>
+                <p><strong>Fecha:</strong> <span id="fecha-seleccionada"></span></p>
+                <p><strong>Horario:</strong> <span id="hora-seleccionada"></span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="module">
+	document.addEventListener("DOMContentLoaded", () => {
+		const form = document.getElementById("form-fecha");
+		const resumen = document.getElementById("resumen-turno");
+		const fechaSpan = document.getElementById("fecha-seleccionada");
+		const horaSpan = document.getElementById("hora-seleccionada");
+
+		form.addEventListener("submit", (e) => {
+			e.preventDefault();
+			const fecha = form.fecha.value;
+			const hora = form.hora.value;
+
+			fechaSpan.textContent = fecha;
+			horaSpan.textContent = hora;
+			resusmen.classList.remove("hidden");
+			resumen.scrollIntoView({ behavior: "smooth" });
+		});
+	});
+</script>
+
+<style>
+    .fecha-section {
+        background-color: var(--color-bg);
+        padding: 40px 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .form-grid {
+        text-align: center;
+        background-color: var(--color-white);
+        border-radius: 8px;
+        box-shadow: 0 1px 3px var(--color-shadow);
+        padding: 24px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-text);
+        margin-bottom: 16px;
+    }
+
+    .fecha-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--color-text-light);
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.2s ease;
+    }
+
+    .input-group input:focus {
+        border-color: var(--color-accent);
+    }
+
+    .btn-confirmar {
+        margin-top: 1rem;
+        padding: 0.9rem 2rem;
+        background: var(--color-accent);
+        color: var(--color-white);
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s ease;
+    }
+
+    .btn-confirmar:hover {
+        background: var(--color-text-light);
+    }
+
+    .resumen-turno {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        border: 1px solid #ddd;
+        border-radius: 1rem;
+        background: var(--color-white);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
