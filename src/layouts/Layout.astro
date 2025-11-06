@@ -4,7 +4,7 @@ import Footer from '../components/Footer.astro';
 
 const { title } = Astro.props;
 const site = Astro.site?.toString() ?? 'https://www.barberiaheroes.com.ar/';
-const favicon = new URL('/favicon.png', site).toString();
+const favicon = new URL('/BarberiaHeroes/favicon.png', site).toString();
 ---
 
 <!doctype html>
@@ -34,8 +34,8 @@ const favicon = new URL('/favicon.png', site).toString();
     <meta name="twitter:description" content="Barberia Heroes: cortes de cabello modernos y clásicos, afeitados tradicionales y cuidado personal en un ambiente acogedor.">
     <meta name="twitter:image" content={favicon}>
     <link rel="canonical" href={site} />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/BarberiaHeroes/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="/BarberiaHeroes/favicon.ico" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
