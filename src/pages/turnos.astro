@@ -30,5 +30,10 @@ import Fecha from '../components/Fecha.astro';
             document.getElementById('profesionales').style.display = 'none';
             document.getElementById('fecha').style.display = 'block';
         }
+
+        if (e.target.classList.contains('back-btn2')) { 
+            document.getElementById('profesionales').style.display = 'block';
+            document.getElementById('fecha').style.display = 'none';
+        }
     });
 </script>

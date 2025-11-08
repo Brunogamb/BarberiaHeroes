@@ -31,6 +31,7 @@ const professionals = [
 
 <section class="professionals-section" id="profesionales" style="display:none;">
     <div class="container">
+        <button class="back-btn">Volver</button>
         <div class="professionals-grid">
             <h2>SELECCIONA UN PROFESIONAL</h2>
             <ul class="professionals-list">
@@ -42,7 +43,6 @@ const professionals = [
                 ))}
             </ul>
         </div>
-        <button class="back-btn">Volver</button>
     </div>
 </section>
 
@@ -61,8 +61,8 @@ const professionals = [
         max-width: 800px;
         margin: 0 auto;
         padding: 0 20px;
+        position: relative;
     }
-
     .professionals-grid {
         background-color: var(--color-white);
         border-radius: 8px;
@@ -129,8 +129,9 @@ const professionals = [
         border: none;
         cursor: pointer;
         transition: all 0.3s ease;
-        display: block;
-        margin: 24px auto 0 auto;
+        position: absolute;
+        left: -80px;
+        top: 24px;
     }
 
     .back-btn:hover {

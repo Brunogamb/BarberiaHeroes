@@ -126,18 +126,16 @@ export interface HeroProps {
         .hero-inner { 
             flex-direction: column-reverse; 
             text-align: center; 
-        }
-
-        .hero-copy { 
-            width: 100%; 
-        }
-
-        .hero-badge { 
-            margin-bottom: 12px; 
+            gap: 14px;
         }
 
         .hero-badge img { 
             width: 160px; 
+            margin-top: auto;
+        }
+
+        .hero-copy {
+            margin-bottom: 20px;
         }
 
         .hero-ctas { 
@@ -146,10 +144,6 @@ export interface HeroProps {
     }
 
     @media (max-width: 440px) {
-        .hero { 
-            padding: 40px 16px; 
-        }
-
         .btn { 
             padding: 10px 16px; 
         }
