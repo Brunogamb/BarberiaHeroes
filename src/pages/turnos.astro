@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import Servicios from '../components/Servicios.astro';
 import Profesionales from '../components/Profesionales.astro';
 import Fecha from '../components/Fecha.astro';
+import Hora from '../components/Hora.astro';
 ---
 
 <Layout title="Barberia Heroes | Sistema de Turnos">
@@ -11,29 +12,54 @@ import Fecha from '../components/Fecha.astro';
     <Servicios />
     <Profesionales />
     <Fecha />
+    <Hora />
 </Layout>
 
 <script type="module">
     document.addEventListener('click', (e) => {
+        const servicios = document.getElementById('servicios');
+        const profesionales = document.getElementById('profesionales');
+        const fecha = document.getElementById('fecha');
+        const hora = document.getElementById('hora');
+
+        // Ir de servicios a profesionales
         if (e.target.classList.contains('reserve-btn')) {
-            document.getElementById('servicios').style.display = 'none';
-            document.getElementById('profesionales').style.display = 'block';
-        }
-        
-        if (e.target.classList.contains('back-btn')) {
-            document.getElementById('servicios').style.display = 'block';
-            document.getElementById('profesionales').style.display = 'none';
+            servicios.style.display = 'none';
+            profesionales.style.display = 'block';
         }
 
+        // Volver de profesionales a servicios
+        if (e.target.classList.contains('back-btn') && profesionales.style.display === 'block') {
+            profesionales.style.display = 'none';
+            servicios.style.display = 'block';
+        }
+
+        // Volver de fecha a profesionales
+        if (e.target.classList.contains('back-btn') && fecha.style.display === 'block') {
+            fecha.style.display = 'none';
+            profesionales.style.display = 'block';
+        }
+
+        // Volver de hora a fecha
+        if (e.target.classList.contains('back-btn') && hora.style.display === 'block') {
+            hora.style.display = 'none';
+            fecha.style.display = 'block';
+        }
+
+        // Pasar de profesionales a fecha
         const botonProfesional = e.target.closest('.next-step');
         if (botonProfesional) {
-            document.getElementById('profesionales').style.display = 'none';
-            document.getElementById('fecha').style.display = 'block';
+            profesionales.style.display = 'none';
+            fecha.style.display = 'block';
         }
+    });
 
-        if (e.target.classList.contains('back-btn2')) { 
-            document.getElementById('profesionales').style.display = 'block';
-            document.getElementById('fecha').style.display = 'none';
-        }
+    // Escucha el evento "fechaSeleccionada" desde el componente Fecha
+    document.addEventListener('fechaSeleccionada', () => {
+        const fecha = document.getElementById('fecha');
+        const hora = document.getElementById('hora');
+
+        fecha.style.display = 'none';
+        hora.style.display = 'block';
     });
 </script>

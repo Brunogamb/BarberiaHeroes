@@ -1,0 +1,149 @@
+---
+const horarios = ['09:00','10:00','11:00','12:00','14:00','15:00','16:00','17:00'];
+---
+
+<section id="hora" class="turno-section" style="display: none;">
+	<div class="container">
+		<button class="back-btn">Volver</button>
+
+		<div class="turno-card">
+			<h2 class="turno-title">ELEGÍ EL HORARIO</h2>
+
+			<div id="horarios-grid" class="grid-horarios">
+				{horarios.map(h => (
+					<button class="grid-item">{h}</button>
+				))}
+			</div>
+
+			<div id="resumen-turno" class="resumen hidden">
+				<h3>Turno seleccionado</h3>
+				<p><strong>Profesional:</strong> <span id="profesional-seleccionado"></span></p>
+                <p><strong>Fecha:</strong> <span id="fecha-seleccionada"></span></p>
+				<p><strong>Hora:</strong> <span id="hora-seleccionada"></span></p>
+				<button id="confirmar-turno" class="btn-primary">Confirmar Turno</button>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style is:global>
+	.grid-horarios {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+		gap: 10px;
+		margin-bottom: 1.5rem;
+	}
+
+	.grid-item {
+		padding: 1rem;
+		border-radius: 8px;
+		background: var(--color-white);
+		border: 1px solid var(--color-text-light);
+		text-align: center;
+		font-weight: 500;
+		cursor: pointer;
+		transition: all 0.15s ease;
+	}
+
+	.grid-item:hover:not(.selected) {
+		background: var(--color-text-light);
+		color: var(--color-white);
+	}
+
+	.grid-item.selected {
+		background: var(--color-text-light);
+		color: var(--color-white);
+	}
+
+	.btn-primary {
+		margin-top: 1rem;
+		padding: 0.9rem 2rem;
+		border: none;
+		border-radius: 1rem;
+		cursor: pointer;
+		font-size: 1rem;
+		font-weight: 600;
+		transition: all 0.2s ease;
+		background: var(--color-accent);
+		color: var(--color-white);
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.btn-primary:hover {
+		background: var(--color-text-light);
+	}
+
+	.resumen {
+		margin-top: 2rem;
+		padding: 1.5rem;
+		border: 1px solid #ddd;
+		border-radius: 1rem;
+		background: var(--color-white);
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+		text-align: center;
+		line-height: 1.6;
+	}
+	.resumen h3 {
+		margin-bottom: 0.5rem;
+		color: var(--color-accent);
+	}
+</style>
+
+<script type="module">
+import { initConfirmarTurno } from '../BarberiaHeroes/src/scripts/confirmarTurno.js';
+
+initConfirmarTurno();
+
+document.addEventListener('DOMContentLoaded', () => {
+	const grid = document.getElementById('horarios-grid');
+	const resumen = document.getElementById('resumen-turno');
+	const fechaSpan = document.getElementById('fecha-seleccionada');
+	const profesionalSpan = document.getElementById('profesional-seleccionado');
+	const horaSpan = document.getElementById('hora-seleccionada');
+	const horaSection = document.getElementById('hora');
+
+	let resumenMostrado = false; 
+
+	function actualizarResumen() {
+		const servicioGuardado = localStorage.getItem('servicioSeleccionado') || 'No seleccionado';
+		const fechaGuardada = localStorage.getItem('fechaSeleccionada') || 'No seleccionada';
+		const profesionalGuardado = localStorage.getItem('profesionalSeleccionado') || 'No seleccionado';
+		const horaGuardada = localStorage.getItem('horaSeleccionada');
+
+		fechaSpan.textContent = fechaGuardada;
+		profesionalSpan.textContent = profesionalGuardado;
+		horaSpan.textContent = horaGuardada || '';
+
+		if (resumenMostrado && horaGuardada) {
+			resumen.classList.remove('hidden');
+		} else {
+			resumen.classList.add('hidden');
+		}
+	}
+
+	const observer = new MutationObserver(() => {
+		if (horaSection.style.display === 'block') {
+			actualizarResumen();
+		}
+	});
+	observer.observe(horaSection, { attributes: true, attributeFilter: ['style'] });
+
+	grid.addEventListener('click', e => {
+		if (!e.target.classList.contains('grid-item')) return;
+
+		grid.querySelectorAll('.grid-item').forEach(c => c.classList.remove('selected'));
+		e.target.classList.add('selected');
+
+		const horaSeleccionada = e.target.textContent;
+		localStorage.setItem('horaSeleccionada', horaSeleccionada);
+
+		horaSpan.textContent = horaSeleccionada;
+
+		if (!resumenMostrado) resumenMostrado = true;
+		resumen.classList.remove('hidden');
+	});
+
+	resumen.classList.add('hidden');
+});
+</script>

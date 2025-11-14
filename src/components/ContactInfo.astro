@@ -3,12 +3,8 @@
     <div class="contact-card">
         <div class="contact-details">
             <div class="contact-hours">
-                <span class="icon"><i class="fa-solid fa-clock"></i></span>
-                <div>
-                    <span class="schedule">Horarios de atención</span><br>
-                    <span>Lunes a Viernes: <b>8:00 - 13:00</b> / <b>16:00 - 20:00</b></span><br>
-                    <span>Sábados: <b>8:00 - 13:00</b></span>
-                </div>
+                <i class="fa-solid fa-clock"></i>
+                <h2 class="schedule">Lunes a Sabados 12:00 - 20:00 hs.</h2>
             </div>
             <div class="contact-links">
                 <a href="http://wa.link/176k1o" class="contact-link" target="_blank" rel="noopener noreferrer">
@@ -41,7 +37,7 @@
 
     .contact-card {
         display: flex;
-        border-radius: 25px;
+        border-radius: 16px;
         box-shadow: 0 6px 32px 0 var(--color-shadow);
         width: 100%;
         overflow: hidden;
@@ -53,19 +49,17 @@
         flex-direction: column;
         justify-content: center;
         gap: 24px;
-        background: var(--color-bg);
-        flex: 1 1 350px;
+        background: var(--color-white);
+        flex: 1 1 250px;
         padding: 48px;
         border-right: 2px solid var(--color-primary-lighter);
     }
 
     .contact-hours {
         display: flex;
-        gap: 16px;
-        font-size: 1.1rem;
-        color: var(--color-text);
-        background: var(--color-accent);
-        border-radius: 25px;
+        color: var(--color-white);
+        background: var(--color-text);
+        border-radius: 16px;
         padding: 16px 24px;
         box-shadow: 0 2px 8px 0 var(--color-shadow);
         text-wrap: balance;
@@ -74,7 +68,7 @@
     .schedule {
         font-weight: 600;
         font-size: 1.2rem;
-        color: var(--color-text);
+        color: var(--color-white);
     }
 
     .contact-links {
@@ -87,15 +81,15 @@
     .contact-link {
         display: flex;
         align-items: center;
-        gap: 16px;
         font-size: 1.1rem;
         color: var(--color-text);
         background: var(--color-white);
-        border-radius: 25px;
         padding: 16px 24px;
-        transition: all 0.2s ease;
         font-weight: 500;
         box-shadow: 0 1px 4px 0 var(--color-shadow);
+        transition: all 0.2s ease;
+        border-left: 2px solid var(--color-text-light);
+        border-radius: 0px 8px 8px 0px;
     }
 
     .contact-link:hover {
@@ -104,8 +98,9 @@
         box-shadow: 0 8px 20px var(--color-shadow-hover);
     }
 
-    .icon {
+    i {
         font-size: 1.4rem;
+        margin-right: 16px;
     }
 
     .contact-map-container {
