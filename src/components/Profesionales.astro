@@ -34,22 +34,6 @@ const professionals = [
     </div>
 </section>
 
-<script type="module">
-    document.addEventListener('click', (e) => {
-        const professionalBtn = e.target.closest('.professional-item');
-        const profesionales = document.getElementById('profesionales');
-        const fecha = document.getElementById('fecha');
-
-        if (professionalBtn) {
-            const name = professionalBtn.dataset.name;
-            localStorage.setItem('profesionalSeleccionado', name);
-
-            profesionales.style.display = 'none';
-            fecha.style.display = 'block';
-        }
-    });
-</script>
-
 <style>
     button {
         border: none;

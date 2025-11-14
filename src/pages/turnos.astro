@@ -22,44 +22,52 @@ import Hora from '../components/Hora.astro';
         const fecha = document.getElementById('fecha');
         const hora = document.getElementById('hora');
 
-        // Ir de servicios a profesionales
-        if (e.target.classList.contains('reserve-btn')) {
+        const reserveBtn = e.target.closest('.reserve-btn');
+        const professionalBtn = e.target.closest('.professional-item');
+        const backBtn = e.target.closest('.back-btn');
+
+        // --- 1. Elegir servicio ---
+        if (reserveBtn) {
+            const servicio = reserveBtn.dataset.service;
+            localStorage.setItem("servicioSeleccionado", servicio);
+
             servicios.style.display = 'none';
             profesionales.style.display = 'block';
         }
 
-        // Volver de profesionales a servicios
-        if (e.target.classList.contains('back-btn') && profesionales.style.display === 'block') {
-            profesionales.style.display = 'none';
-            servicios.style.display = 'block';
-        }
+        // --- 2. Elegir profesional ---
+        if (professionalBtn) {
+            const profesional = professionalBtn.dataset.name;
+            localStorage.setItem('profesionalSeleccionado', profesional);
 
-        // Volver de fecha a profesionales
-        if (e.target.classList.contains('back-btn') && fecha.style.display === 'block') {
-            fecha.style.display = 'none';
-            profesionales.style.display = 'block';
-        }
-
-        // Volver de hora a fecha
-        if (e.target.classList.contains('back-btn') && hora.style.display === 'block') {
-            hora.style.display = 'none';
-            fecha.style.display = 'block';
-        }
-
-        // Pasar de profesionales a fecha
-        const botonProfesional = e.target.closest('.next-step');
-        if (botonProfesional) {
             profesionales.style.display = 'none';
             fecha.style.display = 'block';
+        }
+
+        // --- BOTÓN VOLVER ---
+        if (backBtn) {
+            if (fecha.style.display === 'block') {
+                fecha.style.display = 'none';
+                profesionales.style.display = 'block';
+            } else if (profesionales.style.display === 'block') {
+                profesionales.style.display = 'none';
+                servicios.style.display = 'block';
+            } else if (hora.style.display === 'block') {
+                hora.style.display = 'none';
+                fecha.style.display = 'block';
+            }
         }
     });
 
-    // Escucha el evento "fechaSeleccionada" desde el componente Fecha
-    document.addEventListener('fechaSeleccionada', () => {
-        const fecha = document.getElementById('fecha');
-        const hora = document.getElementById('hora');
+    // --- 3. Evento emitido por el calendario ---
+    document.addEventListener("fechaSeleccionada", (e) => {
+        const fechaElegida = e.detail;
+        localStorage.setItem("fechaSeleccionada", fechaElegida);
 
-        fecha.style.display = 'none';
-        hora.style.display = 'block';
+        const fecha = document.getElementById("fecha");
+        const hora = document.getElementById("hora");
+
+        fecha.style.display = "none";
+        hora.style.display = "block";
     });
 </script>
