@@ -91,8 +91,10 @@ const horarios = ['09:00','10:00','11:00','12:00','14:00','15:00','16:00','17:00
 	}
 </style>
 
-<script type="module" define:vars={{confirmarScript}}>
-import(confirmarScript).then(m => { if (m.initConfirmarTurno) m.initConfirmarTurno(); }).catch(()=>{});
+<script type="module">
+import { initConfirmarTurno } from '/src/scripts/confirmarTurno.js';
+document.addEventListener("DOMContentLoaded", initConfirmarTurno);
+
 document.addEventListener('DOMContentLoaded', () => {
 	const grid = document.getElementById('horarios-grid');
 	const resumen = document.getElementById('resumen-turno');

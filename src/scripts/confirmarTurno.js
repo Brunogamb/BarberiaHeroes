@@ -1,62 +1,41 @@
 import { supabase } from '../lib/supabaseClient.js';
 
 export function initConfirmarTurno() {
+    const btn = document.getElementById('confirmar-turno');
+    if (!btn) return console.warn("⚠ No se encontró el botón Confirmar Turno");
 
-	function attach() {
-		const btn = document.getElementById('confirmar-turno');
-		if (!btn) return;
+    btn.addEventListener('click', async () => {
+        const profesional = localStorage.getItem('profesionalSeleccionado');
+        const fechaUsuario = localStorage.getItem('fechaSeleccionada'); 
+        const hora = localStorage.getItem('horaSeleccionada');
+        const servicio = localStorage.getItem('servicioSeleccionado');
 
-		if (btn.__confirmAttached) return;
-		btn.__confirmAttached = true;
+        if (!profesional || !fechaUsuario || !hora || !servicio) {
+            alert("⚠ Completa profesional, fecha, hora y servicio antes de confirmar.");
+            return;
+        }
 
-		btn.addEventListener('click', async () => {
+        const [dia, mes, año] = fechaUsuario.split('/');
+        const fechaSupabase = `${año}-${mes}-${dia}`;
 
-			const profesional = localStorage.getItem('profesionalSeleccionado');
-			const fechaUsuario = localStorage.getItem('fechaSeleccionada'); // DD/MM/YYYY
-			const hora = document.getElementById('hora-seleccionada')?.textContent || '';
-			const servicio = localStorage.getItem('servicioSeleccionado');
+        try {
+            const { error } = await supabase.from("turnos").insert([
+                { servicio, profesional, fecha: fechaSupabase, hora }
+            ]);
 
-			if (!profesional || !fechaUsuario || !hora || !servicio) {
-				alert('Por favor completá profesional, fecha, hora y servicio antes de confirmar.');
-				return;
-			}
+            if (error) {
+                alert("❌ Error al guardar el turno: " + error.message);
+                console.error(error);
+                return;
+            }
 
-			const [dia, mes, año] = fechaUsuario.split('/');
-			const fechaSupabase = `${año}-${mes}-${dia}`;
+            alert("✅ Turno guardado correctamente");
+            localStorage.clear();
+            location.reload();
 
-			try {
-				const { data, error } = await supabase
-					.from('turnos')
-					.insert([
-						{
-							servicio,
-							profesional,
-							fecha: fechaSupabase,
-							hora
-						}
-					]);
-
-				if (error) {
-					alert('❌ Error al guardar el turno: ' + error.message);
-					console.error('Supabase insert error', error);
-					return;
-				}
-
-				alert('✅ Turno guardado correctamente!');
-				localStorage.clear();
-				window.location.reload();
-
-			} catch (err) {
-				console.error(err);
-				alert('❌ Error inesperado al guardar el turno.');
-			}
-		});
-	}
-
-	attach();
-
-	const observer = new MutationObserver(() => attach());
-	observer.observe(document.body, { childList: true, subtree: true });
-
-	return () => observer.disconnect();
+        } catch (err) {
+            console.error(err);
+            alert("❌ Error inesperado al guardar el turno");
+        }
+    });
 }
