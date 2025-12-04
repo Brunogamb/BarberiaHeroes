@@ -1,7 +1,7 @@
 ---
 const horarios = ['09:00','10:00','11:00','12:00','14:00','15:00','16:00','17:00'];
+const confirmarScript = new URL('../scripts/confirmarTurno.js', import.meta.url).href;
 ---
-
 <section id="hora" class="turno-section" style="display: none;">
 	<div class="container">
 		<button class="back-btn">Volver</button>
@@ -90,11 +90,9 @@ const horarios = ['09:00','10:00','11:00','12:00','14:00','15:00','16:00','17:00
 	}
 </style>
 
+<script type="module" src={confirmarScript}></script>
+
 <script type="module">
-import { initConfirmarTurno } from '../scripts/confirmarTurno.js';
-
-initConfirmarTurno();
-
 document.addEventListener('DOMContentLoaded', () => {
 	const grid = document.getElementById('horarios-grid');
 	const resumen = document.getElementById('resumen-turno');
