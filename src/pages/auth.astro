@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <main class="auth-page">
+    <section class="auth-card">
+      <h1 id="auth-title">Ingresar</h1>
+
+      <div class="tabs">
+        <button id="btn-login" class="active" aria-pressed="true">Iniciar sesión</button>
+        <button id="btn-register" aria-pressed="false">Registrarse</button>
+      </div>
+
+      <form id="login-form" class="auth-form" novalidate>
+        <label for="login-email">Correo electrónico</label>
+        <input id="login-email" name="email" type="email" required />
+
+        <label for="login-password">Contraseña</label>
+        <input id="login-password" name="password" type="password" required minlength="6" />
+
+        <button type="submit" class="btn-primary">Entrar</button>
+      </form>
+
+      <form id="register-form" class="auth-form" hidden novalidate>
+        <label for="reg-nombre">Nombre</label>
+        <input id="reg-nombre" name="nombre" type="text" required />
+
+        <label for="reg-apellido">Apellido</label>
+        <input id="reg-apellido" name="apellido" type="text" required />
+
+        <label for="reg-telefono">Teléfono</label>
+        <input id="reg-telefono" name="telefono" type="tel" />
+
+        <label for="reg-email">Correo electrónico</label>
+        <input id="reg-email" name="email" type="email" required />
+
+        <label for="reg-password">Contraseña</label>
+        <input id="reg-password" name="password" type="password" required minlength="6" />
+
+        <button type="submit" class="btn-primary">Registrarme</button>
+      </form>
+
+    </section>
+  </main>
+
+  <style>
+    .auth-page { display:flex; justify-content:center; padding:40px 20px; }
+    .auth-card { max-width:480px; width:100%; background:var(--color-white, #fff); padding:28px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.08); }
+    .tabs { display:flex; gap:8px; margin-bottom:16px; }
+    .tabs button { flex:1; padding:10px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background:transparent; cursor:pointer; }
+    .tabs button.active { background:var(--color-primary); color:var(--color-white); }
+    .auth-form { display:flex; flex-direction:column; gap:12px; }
+    label { font-weight:600; font-size:0.95rem; }
+    input { padding:10px 12px; border-radius:8px; border:1px solid #ddd; }
+    .btn-primary { margin-top:8px; padding:10px 14px; background:var(--color-accent); color:var(--color-white); border:none; border-radius:8px; cursor:pointer; }
+  </style>
+
+  <script type="module">
+    const btnLogin = document.getElementById('btn-login');
+    const btnRegister = document.getElementById('btn-register');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const title = document.getElementById('auth-title');
+
+    const showLogin = () => {
+      btnLogin.classList.add('active'); btnLogin.setAttribute('aria-pressed','true');
+      btnRegister.classList.remove('active'); btnRegister.setAttribute('aria-pressed','false');
+      loginForm.hidden = false; registerForm.hidden = true; title.textContent = 'Ingresar';
+    };
+
+    const showRegister = () => {
+      btnRegister.classList.add('active'); btnRegister.setAttribute('aria-pressed','true');
+      btnLogin.classList.remove('active'); btnLogin.setAttribute('aria-pressed','false');
+      registerForm.hidden = false; loginForm.hidden = true; title.textContent = 'Registrarse';
+    };
+
+    btnLogin.addEventListener('click', showLogin);
+    btnRegister.addEventListener('click', showRegister);
+
+    // Placeholder submit handlers: replace with real auth logic (Supabase or similar)
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = loginForm.email.value;
+      alert('Intentar iniciar sesión con: ' + email + '\n(Implementa la lógica real)');
+    });
+
+    registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = registerForm.email.value;
+      alert('Intentar registrar: ' + email + '\n(Implementa la lógica real)');
+    });
+  </script>
+</Layout>

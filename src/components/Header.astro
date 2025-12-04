@@ -23,6 +23,13 @@ import logo from '../assets/logo.png';
             </ul>
         </nav>
         <div class="right-bar">
+            <a href="/BarberiaHeroes/auth" class="user-link" aria-label="Iniciar sesión o registrarse" title="Iniciar sesión o registrarse">
+                <svg class="user-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" role="img" aria-hidden="true">
+                    <circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="2.4" fill="none" />
+                    <path d="M4 20c0-3.3 2.7-6 6-6h4c3.3 0 6 2.7 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                </svg>
+                <span class="user-text">Ingresar</span>
+            </a>
             <a href="/BarberiaHeroes/contacto">Contacto</a>
         </div>
         <button class="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
@@ -91,16 +98,22 @@ import logo from '../assets/logo.png';
         box-shadow: 0 2px 8px var(--color-shadow);
     }
 
+    .right-bar a:not(.user-link) {
+        background: var(--color-accent);
+        padding: 10px 25px;
+    }
+
     .right-bar a {
         color: var(--color-white);
         font-weight: 700;
-        background: var(--color-accent);
-        padding: 10px 25px;
         border-radius: 25px;
         transition: all 0.3s ease;
         white-space: nowrap;
         font-size: 1.2rem;
         box-shadow: 0 2px 8px var(--color-shadow);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
     }
 
     .right-bar a:hover {
@@ -108,6 +121,20 @@ import logo from '../assets/logo.png';
         color: var(--color-white);
         text-shadow: none;
         box-shadow: 0 4px 12px var(--color-shadow);
+    }
+
+    .user-link {
+        margin-right: 14px;
+        padding: 10px 20px 10px 16px;
+    }
+
+    .user-icon {
+        width: 24px;
+        height: 24px;
+        color: var(--color-white);
+        display: block;
+        justify-content: center;
+        align-items: center;
     }
 
     .hamburger {
@@ -146,6 +173,14 @@ import logo from '../assets/logo.png';
 
         .left-bar img {
             height: 67px;
+        }
+
+        .user-text {
+            display: none;
+        }
+
+        .user-link {
+            margin-right: 8px;
         }
     }
 
@@ -222,8 +257,8 @@ import logo from '../assets/logo.png';
         }
 
         .mobile-menu a:hover {
-            background: var(--color-primary-lighter, #e0f7f8);
-            color: var(--color-accent, #1e8a8e);
+            background: var(--color-primary-lighter);
+            color: var(--color-accent);
             box-shadow: 0 2px 8px var(--color-shadow);
         }
 
@@ -234,6 +269,40 @@ import logo from '../assets/logo.png';
         body.menu-open {
             overflow: hidden;
             height: 100dvh;
+        }
+
+        .user-link {
+            order: 2;
+            margin-right: 0;
+        }
+
+        .header-main {
+            gap: 12px;
+        }
+
+        .right-bar a:not(.user-link) {
+            background: transparent;
+            padding: 10px 16px;
+        }
+
+        .right-bar {
+            gap: 8px;
+            align-items: center;
+        }
+
+        .right-bar a {
+            padding: 10px;
+        }
+
+        .right-bar a:hover {
+            background: var(--color-primary-lighter);
+            color: var(--color-white);
+            text-shadow: none;
+            box-shadow: 0 4px 12px var(--color-shadow);
+        }
+
+        .user-link {
+            margin-right: 10px;
         }
     }
 </style>
