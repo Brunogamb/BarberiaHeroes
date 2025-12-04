@@ -1,5 +1,4 @@
 ---
-import confirmarScript from '../scripts/confirmarTurno.js?url';
 const horarios = ['09:00','10:00','11:00','12:00','14:00','15:00','16:00','17:00'];
 ---
 
@@ -91,59 +90,59 @@ const horarios = ['09:00','10:00','11:00','12:00','14:00','15:00','16:00','17:00
 	}
 </style>
 
-<script type="module">
-import { initConfirmarTurno } from '/src/scripts/confirmarTurno.js';
-document.addEventListener("DOMContentLoaded", initConfirmarTurno);
+<script is:inline type="module">
+	import { initConfirmarTurno } from '../scripts/confirmarTurno.js';
+	document.addEventListener('DOMContentLoaded', () => {
+		initConfirmarTurno();
 
-document.addEventListener('DOMContentLoaded', () => {
-	const grid = document.getElementById('horarios-grid');
-	const resumen = document.getElementById('resumen-turno');
-	const fechaSpan = document.getElementById('fecha-seleccionada');
-	const profesionalSpan = document.getElementById('profesional-seleccionado');
-	const horaSpan = document.getElementById('hora-seleccionada');
-	const horaSection = document.getElementById('hora');
+    const grid = document.getElementById('horarios-grid');
+    const resumen = document.getElementById('resumen-turno');
+    const fechaSpan = document.getElementById('fecha-seleccionada');
+    const profesionalSpan = document.getElementById('profesional-seleccionado');
+    const horaSpan = document.getElementById('hora-seleccionada');
+    const horaSection = document.getElementById('hora');
 
-	let resumenMostrado = false; 
+    let resumenMostrado = false;
 
-	function actualizarResumen() {
-		const servicioGuardado = localStorage.getItem('servicioSeleccionado') || 'No seleccionado';
-		const fechaGuardada = localStorage.getItem('fechaSeleccionada') || 'No seleccionada';
-		const profesionalGuardado = localStorage.getItem('profesionalSeleccionado') || 'No seleccionado';
-		const horaGuardada = localStorage.getItem('horaSeleccionada');
+    function actualizarResumen() {
+        const servicioGuardado = localStorage.getItem('servicioSeleccionado') || 'No seleccionado';
+        const fechaGuardada = localStorage.getItem('fechaSeleccionada') || 'No seleccionada';
+        const profesionalGuardado = localStorage.getItem('profesionalSeleccionado') || 'No seleccionado';
+        const horaGuardada = localStorage.getItem('horaSeleccionada');
 
-		fechaSpan.textContent = fechaGuardada;
-		profesionalSpan.textContent = profesionalGuardado;
-		horaSpan.textContent = horaGuardada || '';
+        fechaSpan.textContent = fechaGuardada;
+        profesionalSpan.textContent = profesionalGuardado;
+        horaSpan.textContent = horaGuardada || '';
 
-		if (resumenMostrado && horaGuardada) {
-			resumen.classList.remove('hidden');
-		} else {
-			resumen.classList.add('hidden');
-		}
-	}
+        if (resumenMostrado && horaGuardada) {
+            resumen.classList.remove('hidden');
+        } else {
+            resumen.classList.add('hidden');
+        }
+    }
 
-	const observer = new MutationObserver(() => {
-		if (horaSection.style.display === 'block') {
-			actualizarResumen();
-		}
-	});
-	observer.observe(horaSection, { attributes: true, attributeFilter: ['style'] });
+    const observer = new MutationObserver(() => {
+        if (horaSection.style.display === 'block') {
+            actualizarResumen();
+        }
+    });
+    observer.observe(horaSection, { attributes: true, attributeFilter: ['style'] });
 
-	grid.addEventListener('click', e => {
-		if (!e.target.classList.contains('grid-item')) return;
+    grid.addEventListener('click', e => {
+        if (!e.target.classList.contains('grid-item')) return;
 
-		grid.querySelectorAll('.grid-item').forEach(c => c.classList.remove('selected'));
-		e.target.classList.add('selected');
+        grid.querySelectorAll('.grid-item').forEach(c => c.classList.remove('selected'));
+        e.target.classList.add('selected');
 
-		const horaSeleccionada = e.target.textContent;
-		localStorage.setItem('horaSeleccionada', horaSeleccionada);
+        const horaSeleccionada = e.target.textContent;
+        localStorage.setItem('horaSeleccionada', horaSeleccionada);
 
-		horaSpan.textContent = horaSeleccionada;
+        horaSpan.textContent = horaSeleccionada;
 
-		if (!resumenMostrado) resumenMostrado = true;
-		resumen.classList.remove('hidden');
-	});
+        if (!resumenMostrado) resumenMostrado = true;
+        resumen.classList.remove('hidden');
+    });
 
-	resumen.classList.add('hidden');
+    resumen.classList.add('hidden');
 });
 </script>
