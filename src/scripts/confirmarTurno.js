@@ -1,4 +1,4 @@
-import { supabase } from '../../src/lib/supabaseClient.js';
+import { supabase } from '../lib/supabaseClient.js';
 
 export function initConfirmarTurno() {
     const btn = document.getElementById('confirmar-turno');
