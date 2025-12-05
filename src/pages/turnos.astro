@@ -12,8 +12,16 @@ import Hora from '../components/Hora.astro';
     <Servicios />
     <Profesionales />
     <Fecha />
-    <Hora />
+    <Hora client:load/>
 </Layout>
+
+<script type="module">
+    import { initConfirmarTurno } from '/BarberiaHeroes/src/scripts/confirmarTurno.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initConfirmarTurno();
+    });
+</script>
 
 <script type="module">
     document.addEventListener('click', (e) => {
