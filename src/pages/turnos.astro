@@ -1,73 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
-import Servicios from '../components/Servicios.astro';
-import Profesionales from '../components/Profesionales.astro';
-import Fecha from '../components/Fecha.astro';
-import Hora from '../components/Hora.astro';
+import ReservaTurno from "../components/ReservaTurno.jsx";
 ---
 
 <Layout title="Barberia Heroes | Sistema de Turnos">
     <Hero title="Sistema de Turnos" subtitle="Reserva tu turno y vive la experiencia de Barbería Héroes." />
-    <Servicios />
-    <Profesionales />
-    <Fecha />
-    <Hora/>
+    <ReservaTurno client:load/>
 </Layout>
-
-<script type="module">
-    document.addEventListener('click', (e) => {
-        const servicios = document.getElementById('servicios');
-        const profesionales = document.getElementById('profesionales');
-        const fecha = document.getElementById('fecha');
-        const hora = document.getElementById('hora');
-
-        const reserveBtn = e.target.closest('.reserve-btn');
-        const professionalBtn = e.target.closest('.professional-item');
-        const backBtn = e.target.closest('.back-btn');
-
-        // --- 1. Elegir servicio ---
-        if (reserveBtn) {
-            const servicio = reserveBtn.dataset.service;
-            localStorage.setItem("servicioSeleccionado", servicio);
-
-            servicios.style.display = 'none';
-            profesionales.style.display = 'block';
-        }
-
-        // --- 2. Elegir profesional ---
-        if (professionalBtn) {
-            const profesional = professionalBtn.dataset.name;
-            localStorage.setItem('profesionalSeleccionado', profesional);
-
-            profesionales.style.display = 'none';
-            fecha.style.display = 'block';
-        }
-
-        // --- BOTÓN VOLVER ---
-        if (backBtn) {
-            if (fecha.style.display === 'block') {
-                fecha.style.display = 'none';
-                profesionales.style.display = 'block';
-            } else if (profesionales.style.display === 'block') {
-                profesionales.style.display = 'none';
-                servicios.style.display = 'block';
-            } else if (hora.style.display === 'block') {
-                hora.style.display = 'none';
-                fecha.style.display = 'block';
-            }
-        }
-    });
-
-    // --- 3. Evento emitido por el calendario ---
-    document.addEventListener("fechaSeleccionada", (e) => {
-        const fechaElegida = e.detail;
-        localStorage.setItem("fechaSeleccionada", fechaElegida);
-
-        const fecha = document.getElementById("fecha");
-        const hora = document.getElementById("hora");
-
-        fecha.style.display = "none";
-        hora.style.display = "block";
-    });
-</script>
